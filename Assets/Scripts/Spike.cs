@@ -5,15 +5,9 @@ public class Spike : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Spike"))
+        if (collision.CompareTag("Player"))
         {
-            RestartScene();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-    }
-
-    private void RestartScene()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
     }
 }
