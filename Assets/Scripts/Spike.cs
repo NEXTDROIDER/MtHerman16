@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SpikeObstacle : MonoBehaviour
+public class Spike : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
