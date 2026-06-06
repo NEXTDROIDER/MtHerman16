@@ -4,10 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class HealthUI : MonoBehaviour
 {
-    [Header("Hearts UI")]
     public Image[] hearts;
 
-    [Header("Heart Sprites")]
     public Sprite heart;
     public Sprite heartBroken;
 
@@ -15,11 +13,36 @@ public class HealthUI : MonoBehaviour
 
     private void Start()
     {
+        if (hearts == null || hearts.Length == 0)
+        {
+            Debug.LogError("Hearts array is empty. Drag your heart UI Images into the HealthUI script.");
+            return;
+        }
+
+        if (heart == null)
+        {
+            Debug.LogError("Normal heart sprite is missing.");
+            return;
+        }
+
+        if (heartBroken == null)
+        {
+            Debug.LogError("Broken heart sprite is missing.");
+            return;
+        }
+
         health = hearts.Length;
 
         for (int i = 0; i < hearts.Length; i++)
         {
-            hearts[i].sprite = heart;
+            if (hearts[i] != null)
+            {
+                hearts[i].sprite = heart;
+            }
+            else
+            {
+                Debug.LogError("Heart slot " + i + " is empty.");
+            }
         }
     }
 
@@ -35,7 +58,7 @@ public class HealthUI : MonoBehaviour
     {
         health--;
 
-        if (health >= 0)
+        if (health >= 0 && hearts[health] != null)
         {
             hearts[health].sprite = heartBroken;
         }
