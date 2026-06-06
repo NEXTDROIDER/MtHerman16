@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 public class HealthUI : MonoBehaviour
 {
     public Image[] hearts;
-
     public Sprite heart;
     public Sprite heartBroken;
-    [Tooltip("Optional starting health. If 0, the heart count defines starting health.")]
+    [Tooltip("Optional starting health. If 0, the number of hearts defines starting health.")]
     public int startingHealth = 0;
 
     private int health;
@@ -17,19 +16,13 @@ public class HealthUI : MonoBehaviour
     {
         if (hearts == null || hearts.Length == 0)
         {
-            Debug.LogError("Hearts array is empty. Drag your heart UI Images into the HealthUI script.");
+            Debug.LogError("HealthUI needs heart UI Images assigned in the inspector.");
             return;
         }
 
-        if (heart == null)
+        if (heart == null || heartBroken == null)
         {
-            Debug.LogError("Normal heart sprite is missing.");
-            return;
-        }
-
-        if (heartBroken == null)
-        {
-            Debug.LogError("Broken heart sprite is missing.");
+            Debug.LogError("HealthUI needs both heart and heartBroken sprites assigned.");
             return;
         }
 
@@ -37,22 +30,19 @@ public class HealthUI : MonoBehaviour
         UpdateHearts();
     }
 
-    private void UpdateHearts()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        for (int i = 0; i < hearts.Length; i++)
+        if (collision.CompareTag("Spike"))
         {
-            if (hearts[i] == null)
-            {
-                Debug.LogError("Heart slot " + i + " is empty.");
-                continue;
-            }
-
-            hearts[i].sprite = i < health ? heart : heartBroken;
+            TakeDamage();
         }
     }
 
     public void TakeDamage(int amount = 1)
     {
+        if (hearts == null || hearts.Length == 0)
+            return;
+
         if (health <= 0 || amount <= 0)
             return;
 
@@ -62,6 +52,20 @@ public class HealthUI : MonoBehaviour
         if (health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void UpdateHearts()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (hearts[i] == null)
+            {
+                Debug.LogError("HealthUI heart slot " + i + " is not assigned.");
+                continue;
+            }
+
+            hearts[i].sprite = i < health ? heart : heartBroken;
         }
     }
 }
