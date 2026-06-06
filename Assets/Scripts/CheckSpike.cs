@@ -5,8 +5,11 @@ public class SpikeObstacle : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Spike"))
+        Debug.Log("Touched: " + other.gameObject.name);
+
+        if (other.CompareTag("spike"))
         {
+            Debug.Log("Spike touched. Restarting scene...");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

@@ -1,8 +1,8 @@
-$path = "C:\Users\Student\Documents\GitHub\MtHerman16"
+$path = "C:\Users\Student\Documents\MTHermanTF2 16\MTHermanTF216"
 $filter = "*.*"
 
 cd $path
-Write-Host "Слежение за репозиторием запущено..." -ForegroundColor Green
+Write-Host "Repository monitoring started..." -ForegroundColor Green
 
 $fsw = New-Object IO.FileSystemWatcher $path, $filter
 $fsw.IncludeSubdirectories = $true
@@ -10,15 +10,15 @@ $fsw.EnableRaisingEvents = $true
 
 $action = {
     $filePath = $Event.SourceEventArgs.FullPath
-    # Игнорируем изменения внутри самой папки .git
+    # Ignore changes inside the .git folder
     if ($filePath -notmatch '\\\.git\\') {
         $time = Get-Date -Format "HH:mm:ss"
-        Write-Host "[$time] Изменение в: $filePath" -ForegroundColor Yellow
+        Write-Host "[$time] Changed file: $filePath" -ForegroundColor Yellow
 
-        # Выполняем команды Git
+        # Git commands execution
         git add -A
-        git commit -m "Авто-коммит: изменение файла"
-        # Раскомментируйте строку ниже, если нужен авто-пуш на GitHub:
+        git commit -m "Auto-commit: file changed"
+        # Uncomment the line below if you need auto-push to GitHub:
         # git push
     }
 }
