@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public class BreadCoin : MonoBehaviour
+namespace MTHermanTF2
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    public class BreadCoin : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("Bread collected!");
-
-            if (ScoreManager.instance != null)
+            if (other.CompareTag("Player"))
             {
-                ScoreManager.instance.AddScore(1);
-            }
-            else
-            {
-                Debug.LogError("ScoreManager instance not found. Add a ScoreManager object to the scene.");
-            }
+                Debug.Log("Bread collected!");
 
-            Destroy(gameObject);
+                if (global::ScoreManager.instance != null)
+                {
+                    global::ScoreManager.instance.AddScore(1);
+                }
+                else
+                {
+                    Debug.LogError("ScoreManager instance not found. Add a ScoreManager object to the scene.");
+                }
+
+                Destroy(gameObject);
+            }
         }
     }
 }
