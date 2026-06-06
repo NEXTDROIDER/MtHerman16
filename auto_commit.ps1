@@ -17,6 +17,7 @@ $action = {
 
         # 1. Фиксируем локальные изменения
         git add -A
+<<<<<<< HEAD
         # Проверяем, есть ли что коммитить, чтобы не плодить пустые коммиты
         $status = git status --porcelain
         if ($status) {
@@ -42,6 +43,12 @@ $action = {
             Write-Host "[$time] Pushing changes to GitHub..." -ForegroundColor Green
             git push origin
         }
+=======
+        git commit -m "Auto-commit: file changed"
+        # Uncomment the line below if you need auto-push to GitHub:
+         git push
+         git fetch
+>>>>>>> dc69883 (Auto-commit: file changed)
     }
 }
 
