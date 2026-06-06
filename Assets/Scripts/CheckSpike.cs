@@ -7,7 +7,7 @@ public class CheckSpike : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Spike touched. Restarting scene...");
+            Debug.Log("Player hit a spike. Restarting scene...");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
