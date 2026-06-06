@@ -10,7 +10,7 @@ namespace MTHermanTF2
             {
                 Debug.Log("Bread collected!");
 
-                var scoreManager = ScoreManager.instance;
+                var scoreManager = MTHermanTF2.ScoreManager.instance;
                 if (scoreManager != null)
                 {
                     scoreManager.AddScore(1);
