@@ -32,17 +32,20 @@ public class HealthUI : MonoBehaviour
         }
 
         health = hearts.Length;
+        UpdateHearts();
+    }
 
+    private void UpdateHearts()
+    {
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (hearts[i] != null)
-            {
-                hearts[i].sprite = heart;
-            }
-            else
+            if (hearts[i] == null)
             {
                 Debug.LogError("Heart slot " + i + " is empty.");
+                continue;
             }
+
+            hearts[i].sprite = i < health ? heart : heartBroken;
         }
     }
 
@@ -56,12 +59,11 @@ public class HealthUI : MonoBehaviour
 
     private void TakeDamage()
     {
-        health--;
+        if (health <= 0)
+            return;
 
-        if (health >= 0 && hearts[health] != null)
-        {
-            hearts[health].sprite = heartBroken;
-        }
+        health--;
+        UpdateHearts();
 
         if (health <= 0)
         {
