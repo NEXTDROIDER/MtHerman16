@@ -10,9 +10,9 @@ namespace MTHermanTF2
             {
                 Debug.Log("Bread collected!");
 
-                if (global::MTHermanTF2.ScoreManager.instance != null)
+                if (ScoreManager.instance != null)
                 {
-                    global::MTHermanTF2.ScoreManager.instance.AddScore(1);
+                    ScoreManager.instance.AddScore(1);
                 }
                 else
                 {
