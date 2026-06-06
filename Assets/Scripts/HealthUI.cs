@@ -8,6 +8,8 @@ public class HealthUI : MonoBehaviour
 
     public Sprite heart;
     public Sprite heartBroken;
+    [Tooltip("Optional starting health. If 0, the heart count defines starting health.")]
+    public int startingHealth = 0;
 
     private int health;
 
@@ -31,7 +33,7 @@ public class HealthUI : MonoBehaviour
             return;
         }
 
-        health = hearts.Length;
+        health = startingHealth > 0 ? Mathf.Clamp(startingHealth, 0, hearts.Length) : hearts.Length;
         UpdateHearts();
     }
 
@@ -49,20 +51,12 @@ public class HealthUI : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void TakeDamage(int amount = 1)
     {
-        if (collision.CompareTag("Spike"))
-        {
-            TakeDamage();
-        }
-    }
-
-    private void TakeDamage()
-    {
-        if (health <= 0)
+        if (health <= 0 || amount <= 0)
             return;
 
-        health--;
+        health = Mathf.Max(health - amount, 0);
         UpdateHearts();
 
         if (health <= 0)
