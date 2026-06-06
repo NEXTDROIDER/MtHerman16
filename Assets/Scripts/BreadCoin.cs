@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MTHermanTF2
+namespace Assets.Scripts
 {
     public class BreadCoin : MonoBehaviour
     {
@@ -16,13 +16,14 @@ namespace MTHermanTF2
 
                 Debug.Log("Bread collected!");
 
-                if (ScoreManager.instance != null)
+                ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                if (scoreManager != null)
                 {
-                    ScoreManager.instance.AddScore(1);
+                    scoreManager.AddScore(1);
                 }
                 else
                 {
-                    Debug.LogError("ScoreManager instance not found. Make sure ScoreManager exists in the scene.");
+                    Debug.LogError("ScoreManager not found. Make sure a ScoreManager exists in the scene.");
                 }
 
                 Destroy(gameObject);
