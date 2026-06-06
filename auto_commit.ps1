@@ -1,4 +1,4 @@
-$path = "C:\Users\Student\Documents\MTHermanTF2 16\MTHermanTF216"
+$path = "C:\Users\Student\Documents\GitHub\MtHerman16"
 $filter = "*.*"
 
 cd $path
