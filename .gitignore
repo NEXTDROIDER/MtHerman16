@@ -106,3 +106,4 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
 # Auto commit
+auto_commit.ps1
